@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String description;
     private double amount;

@@ -9,8 +9,10 @@ import java.util.List;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    
 
     @OneToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
@@ -26,6 +28,8 @@ public class Cart {
 
     @OneToOne(mappedBy = "cart")
     private Transaction transaction;
+
+
 
     public Cart(User user, List<Product> products) {
         this.user = user;

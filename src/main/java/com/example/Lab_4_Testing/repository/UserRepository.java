@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
+import com.example.Lab_4_Testing.Models.Cart;
 import com.example.Lab_4_Testing.Models.User;
 
 import jakarta.transaction.Transactional;
@@ -27,5 +28,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Procedure(procedureName = "delete_user")
     public void deleteUser(@Param(value = "userId") UUID userId);
+
+    // public Cart getCartByUserId(UUID user_id);
 
 }

@@ -18,10 +18,6 @@ public class User {
     private String email;
     private int age;
     
-    @OneToOne(mappedBy = "user")
-    @ToString.Exclude
-    private Cart cart;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Transaction> transactions;

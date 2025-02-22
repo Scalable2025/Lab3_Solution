@@ -1,16 +1,21 @@
 package com.example.Lab_4_Testing.Models;
 
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private double price;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Cart> carts;
 
     public Product(String name, double price) {
         this.name = name;
@@ -43,4 +48,14 @@ public class Product {
     public void setId(int id) {
         this.id = id;
     }
+
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
+    
+
 }

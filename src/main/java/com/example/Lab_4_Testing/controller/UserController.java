@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Lab_4_Testing.Models.Cart;
 import com.example.Lab_4_Testing.Models.User;
 import com.example.Lab_4_Testing.service.UserService;
 
@@ -42,6 +43,11 @@ public class UserController {
         return userService.findUserById(userId);
     }
 
+    // @GetMapping("/getCart/{userId}")
+    // public Cart getCartByUserId(@PathVariable UUID userId) {
+    //     return userService.getCartByUserId(userId);
+    // }
+
     @PutMapping("/{userId}")
     public String updateUser(@PathVariable UUID userId, @RequestBody User user) {
         return userService.updateUser(user.getName(), user.getEmail(), user.getAge(), userId);
@@ -51,5 +57,6 @@ public class UserController {
     public void deleteUser(@PathVariable UUID userId) {
         userService.deleteUser(userId);
     }
+
 
 }
