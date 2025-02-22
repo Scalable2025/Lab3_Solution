@@ -17,10 +17,16 @@ public class User {
     private String name;
     private String email;
     private int age;
+    
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private Cart cart;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Transaction> transactions;
+
+    //Constructors and Getters and Setters
 
     public User(String name, String email, int age) {
         this.name = name;
