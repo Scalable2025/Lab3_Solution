@@ -21,6 +21,8 @@ public class Transaction {
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
+    // Constructor and Getters and Setters
+
     public Transaction(String description, double amount, String date, Cart cart, User user) {
         this.description = description;
         this.amount = amount;

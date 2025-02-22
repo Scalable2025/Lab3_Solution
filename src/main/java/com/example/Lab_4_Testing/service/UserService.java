@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Lab_4_Testing.Models.Cart;
 import com.example.Lab_4_Testing.Models.User;
 import com.example.Lab_4_Testing.repository.UserRepository;
 
@@ -39,6 +38,17 @@ public class UserService {
     //     return userRepository.getCartByUserId(userId);
 
     // }
+
+    public void populateRandom(){
+        for(int i=0;i<10;i++){
+            User user = new User();
+            user.setName("User"+i);
+            user.setEmail("user"+i+"@gmail.com");
+            user.setAge(20+i);
+            userRepository.save(user);
+        }
+
+    }
     
     public String updateUser(String name, String email, int age, UUID userId) {
         try{

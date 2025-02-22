@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Lab_4_Testing.Models.Cart;
 import com.example.Lab_4_Testing.Models.User;
+import com.example.Lab_4_Testing.service.DatabasePopulatorService;
 import com.example.Lab_4_Testing.service.UserService;
 
 @RestController
@@ -22,12 +24,19 @@ import com.example.Lab_4_Testing.service.UserService;
 public class UserController {
 
     private UserService userService;
+    private DatabasePopulatorService databasePopulatorService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, DatabasePopulatorService databasePopulatorService) {
         this.userService = userService;
+        this.databasePopulatorService = databasePopulatorService;
     }
 
+    @PostMapping("/populateRandom")
+    public void populateRandom() {
+        userService.populateRandom();
+        databasePopulatorService.populateDatabase();
+    }
     @PostMapping("/")
     public User createUser(@RequestBody User user) {
         return userService.saveUser(user);
@@ -43,10 +52,6 @@ public class UserController {
         return userService.findUserById(userId);
     }
 
-    // @GetMapping("/getCart/{userId}")
-    // public Cart getCartByUserId(@PathVariable UUID userId) {
-    //     return userService.getCartByUserId(userId);
-    // }
 
     @PutMapping("/{userId}")
     public String updateUser(@PathVariable UUID userId, @RequestBody User user) {

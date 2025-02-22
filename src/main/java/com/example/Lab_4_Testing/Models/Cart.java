@@ -11,13 +11,9 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    
-
     @OneToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
-
     @ManyToMany
     @JoinTable(
             name = "cart_product",
@@ -25,9 +21,10 @@ public class Cart {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products;
-
     @OneToOne(mappedBy = "cart")
     private Transaction transaction;
+
+    //Constructor and Getters and Setters
 
 
 
