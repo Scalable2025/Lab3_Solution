@@ -2,30 +2,29 @@ package com.example.Lab_4_Testing.Models;
 
 
 import jakarta.persistence.*;
+import lombok.ToString;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "\"users\"")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "UUID DEFAULT gen_random_uuid()")
-    private int id;
-    private String Name;
-    private String Email;
+    private UUID id;
+    private String name;
+    private String email;
     private int age;
 
-    @OneToOne(mappedBy = "user_id")
-    private Cart cart;
-
-    @OneToMany(mappedBy = "user")
-    @JoinColumn(name = "transactionID", referencedColumnName = "id")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Transaction> transactions;
 
     public User(String name, String email, int age) {
-        Name = name;
-        Email = email;
+        this.name = name;
+        this.email = email;
         this.age = age;
     }
 
@@ -34,19 +33,19 @@ public class User {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public int getAge() {
@@ -57,7 +56,19 @@ public class User {
         this.age = age;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
